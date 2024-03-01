@@ -2,7 +2,7 @@ import pic from './pic.png';
 import rocket from './rocket.png';
 import thunder from './thunder.png';
 import './App.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 const tg = window.Telegram.WebApp;
 const ACCUM = 100;
@@ -40,7 +40,7 @@ function App() {
           </div>
           <div className={'instruments'}>
               <div id="turbo" onClick={handleTurboClick}>
-                  <img src={rocket} alt="turbo"/>
+                  <img src={'rocket.png'} alt="turbo"/>
               </div>
               <span className="devider"></span>
               <div id="accum" onClick={handleAccumClick}>
