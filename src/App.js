@@ -40,7 +40,7 @@ function App() {
           </div>
           <div className={'instruments'}>
               <div id="turbo" onClick={handleTurboClick}>
-                  <img src={'rocket.png'} alt="turbo"/>
+                  <img src={rocket} alt="turbo"/>
               </div>
               <span className="devider"></span>
               <div id="accum" onClick={handleAccumClick}>
