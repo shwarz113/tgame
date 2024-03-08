@@ -5,6 +5,7 @@ import store from './store1.png';
 import './index.css';
 import {Popup} from "./popups";
 import {Investments} from "./popups/investments";
+import {instrumentsLevelsMock} from "./constants";
 
 const ACCUM = 100;
 const INC_VALUE = 1;
@@ -62,7 +63,7 @@ export const MainContainer: FC<Props> = ({ points, setPoints }) => {
             </div>
             { isOpenPopup && (
                 <Popup title={'INVESTMENTS'} onClose={() => setIsOpenPopup(false)}>
-                    <Investments/>
+                    <Investments points={points} levels={instrumentsLevelsMock}/>
                 </Popup>
             )}
         </div>
