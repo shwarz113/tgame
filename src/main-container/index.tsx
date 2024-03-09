@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import { action } from 'mobx';
 import rocket from '../rocket.png';
 import thunder from '../thunder.png';
@@ -41,13 +41,18 @@ export const MainContainer = observer(() => {
             gameStore.accum = ACCUM;
         }
     });
-    const handleBuy = action((name: string, price: number) => {
-        if (price <= points) {
-            gameStore.points -= price;
-            gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
-            gameStore.pointsPerSecond += investments.find(({ name: v}) => v === name)?.base_income || 0
-        }
+
+    const handleBuyAction = action((name: string, points: number) => {
+        gameStore.points = points;
+        gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
+        gameStore.pointsPerSecond += investments.find(({ name: v}) => v === name)?.base_income || 0
     });
+
+    const handleBuy = useCallback((name: string, price: number) => {
+        if (price <= points) {
+            handleBuyAction(name, points - price);
+        }
+    }, [points]);
 
     const incPointsPerPeriod = action(() => {
         gameStore.points += gameStore.pointsPerSecond;

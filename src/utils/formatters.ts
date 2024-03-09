@@ -11,5 +11,5 @@ export const nFormatter = ({ num, precision = 1 }: NFormatter) => {
     ];
     const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
     const item = lookup.slice().reverse().find(item => num >= item.value);
-    return item ? (num / item.value).toFixed(precision).replace(regexp, "").concat(item.symbol) : "0";
+    return item ? (num / item.value).toFixed(precision).replace(regexp, "").concat(item.symbol) : num.toFixed(precision);
 }
