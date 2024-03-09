@@ -69,13 +69,16 @@ export const MainContainer = observer(() => {
             <div className={'instruments'}>
                 <div id="store" onClick={handleStoreClick}>
                     <img src={store} alt="store" />
+                    <div>Investments</div>
                 </div>
                 <div id="turbo" onClick={switchOnTurboClickMode}>
                     <img src={rocket} alt="turbo" />
+                    Turbo (x{TURBO_MULTIPLIER_TAP})
                 </div>
                 <span className="devider"></span>
                 <div id="accum" onClick={handleAccumClick}>
                     <img src={thunder} alt="energy" />
+                    Energy
                 </div>
             </div>
             {isOpenPopup && (

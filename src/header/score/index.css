@@ -1,4 +1,6 @@
 .score-header {
+    position: relative;
+    top: -8px;
     width: 200px;
     border: 4px solid gold;
     border-radius: 0 0 30px 30px;
