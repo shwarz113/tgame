@@ -13,5 +13,3 @@ export const instrumentsMock: Investments = [
     { name: 'P2P/Exchange business', base_price: 1000000, pic: p2p, base_income: 125000 },
     { name: 'Coinface Inc.', base_price: 1000000000, pic: exchange, base_income: 11250000 },
 ]
-
-export const instrumentsLevelsMock: number[] = [0, 0, 0, 0, 0];

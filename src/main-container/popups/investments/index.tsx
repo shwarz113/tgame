@@ -1,26 +1,39 @@
-import {InvestmentsItem} from "./item";
-import {instrumentsLevelsMock, instrumentsMock, PRICE_MULTIPLIER} from "../../constants";
-import {FC, useCallback} from "react";
+import { InvestmentsItem } from './item';
+import { instrumentsMock } from '../../constants';
+import { FC, useCallback } from 'react';
+import {getPriceValue} from "../../../utils/getPriceValue";
 
 type Props = {
     points: number;
-    levels: number[];
-}
+    levels: Record<string, number>;
+    handleBuy: (name: string, price: number) => void;
+};
 
 type Values = {
     price: number;
     isAvailable: boolean;
 };
-export const Investments: FC<Props> = ({ points, levels}) => {
-    const getValues = useCallback((base_price: number, index: number): Values => {
-        const price = Math.ceil((base_price * (PRICE_MULTIPLIER ** levels[index])));
-        const isAvailable = price <= points;
-        return { price, isAvailable };
-    }, [points])
+export const Investments: FC<Props> = ({ points, levels, handleBuy }) => {
+    const getValues = useCallback(
+        (name: string, base_price: number): Values => {
+            const price = getPriceValue({ base_price, level: levels[name] });
+            const isAvailable = price <= points;
+            return { price, isAvailable };
+        },
+        [points]
+    );
 
-    return <div className={'investments-wrapper'}>
-        {instrumentsMock.map((v, i) => (
-            <InvestmentsItem key={v.name} data={v} level={instrumentsLevelsMock[i]} {...getValues(v.base_price, i)} />
-        ))}
-    </div>
-}
+    return (
+        <div className={'investments-wrapper'}>
+            {instrumentsMock.map((v, i) => (
+                <InvestmentsItem
+                    key={v.name}
+                    data={v}
+                    level={levels[v.name]}
+                    handleBuy={handleBuy}
+                    {...getValues(v.name, v.base_price)}
+                />
+            ))}
+        </div>
+    );
+};

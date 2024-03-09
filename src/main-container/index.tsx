@@ -1,71 +1,88 @@
-import React, { FC, useState } from 'react';
+import React, {FC, useEffect, useState} from 'react';
+import { action } from 'mobx';
 import rocket from '../rocket.png';
 import thunder from '../thunder.png';
 import store from './store1.png';
 import './index.css';
-import {Popup} from "./popups";
-import {Investments} from "./popups/investments";
-import {instrumentsLevelsMock} from "./constants";
+import { Popup } from './popups';
+import { Investments } from './popups/investments';
+import { useStore } from '../store/store';
+import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../store/constants';
+import {observer} from "mobx-react-lite";
 
-const ACCUM = 100;
-const INC_VALUE = 1;
-const INC_TURBO_VALUE = 5;
-const TOUCHES = 0;
-
-type Props = {
-    points: number;
-    setPoints: (v: number) => void;
-};
-export const MainContainer: FC<Props> = ({ points, setPoints }) => {
-    const [incValue, setIncValue] = useState(INC_VALUE);
-    const [accum, setAccum] = useState(ACCUM);
-    const [touches, setTouches] = useState(TOUCHES);
+export const MainContainer = observer(() => {
+    const { gameStore } = useStore();
+    const { points, accum, incTapValue, isTurboTapMode, levelsByName, investments } = gameStore;
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
-    const handleCoinClick = () => {
+    const handleCoinClick = action(() => {
         if (accum) {
-            setPoints(points + incValue);
-            setAccum(accum - 1);
+            gameStore.points += incTapValue;
+            gameStore.accum -= 1;
         }
-    };
-    const handleTurboClick = () => {
-        if (incValue !== INC_TURBO_VALUE) {
-            setIncValue(INC_TURBO_VALUE);
-            setTimeout(() => setIncValue(INC_VALUE), 3000);
+    });
+
+    const switchOffTurboClickMode = action(() => {
+        gameStore.incTapValue /= TURBO_MULTIPLIER_TAP;
+    });
+
+    const switchOnTurboClickMode = action(() => {
+        if (!isTurboTapMode) {
+            setTimeout(() => switchOffTurboClickMode(), TURBO_TIME);
+            gameStore.incTapValue += TURBO_MULTIPLIER_TAP;
         }
-    };
+    });
+
     const handleStoreClick = () => {
         setIsOpenPopup(true);
     };
-    const handleAccumClick = () => {
-        if (accum !== 10) {
-            setAccum(ACCUM);
+    const handleAccumClick = action(() => {
+        if (accum !== ACCUM) {
+            gameStore.accum = ACCUM;
         }
-    };
+    });
+    const handleBuy = action((name: string, price: number) => {
+        if (price <= points) {
+            gameStore.points -= price;
+            gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
+            gameStore.pointsPerSecond += investments.find(({ name: v}) => v === name)?.base_income || 0
+        }
+    });
+
+    const incPointsPerPeriod = action(() => {
+        gameStore.points += gameStore.pointsPerSecond;
+        setTimeout(incPointsPerPeriod, 1000);
+    })
+
+    useEffect(() => {
+        incPointsPerPeriod();
+    }, [])
 
     return (
         <div className={'main-container'}>
-            <div className="main-container-bg" onClick={handleCoinClick}><div></div></div>
+            <div className="main-container-bg" onClick={handleCoinClick}>
+                <div></div>
+            </div>
             <div className="App-footer">
-                <img src={thunder} alt="energy"/> {accum} / {ACCUM}
+                <img src={thunder} alt="energy" /> {accum} / {ACCUM}
             </div>
             <div className={'instruments'}>
                 <div id="store" onClick={handleStoreClick}>
-                    <img src={store} alt="store"/>
+                    <img src={store} alt="store" />
                 </div>
-                <div id="turbo" onClick={handleTurboClick}>
-                    <img src={rocket} alt="turbo"/>
+                <div id="turbo" onClick={switchOnTurboClickMode}>
+                    <img src={rocket} alt="turbo" />
                 </div>
                 <span className="devider"></span>
                 <div id="accum" onClick={handleAccumClick}>
-                    <img src={thunder} alt="energy"/>
+                    <img src={thunder} alt="energy" />
                 </div>
             </div>
-            { isOpenPopup && (
+            {isOpenPopup && (
                 <Popup title={'INVESTMENTS'} onClose={() => setIsOpenPopup(false)}>
-                    <Investments points={points} levels={instrumentsLevelsMock}/>
+                    <Investments points={points} levels={levelsByName} handleBuy={handleBuy} />
                 </Popup>
             )}
         </div>
     );
-};
+})

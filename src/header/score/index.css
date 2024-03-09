@@ -1,0 +1,17 @@
+.score-header {
+    width: 200px;
+    border: 4px solid gold;
+    border-radius: 0 0 30px 30px;
+    background: black;
+}
+.score-header-points {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+
+    img {
+        height: 35px;
+    }
+}
