@@ -1,5 +1,7 @@
 .main-container {
-    flex: 8;
+    flex: auto;
+    display: flex;
+    flex-direction: column;
 }
 .main-container-bg {
     position: relative;
@@ -9,8 +11,6 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    min-height: 200px;
-    max-height: 420px;
 
     div {
         position: absolute;
