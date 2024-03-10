@@ -102,7 +102,7 @@ export const MainContainer = observer(() => {
                     <AnimatedNumber value={TURBO_TIME} formatValue={formatTimerValue} duration={TURBO_TIME} />
                 </div>
             ) : null}
-            <div className="main-container-bg" onClick={handleCoinClick}>
+            <div className="main-container-bg" onTouchStart={handleCoinClick}>
                 <div></div>
             </div>
             <div>&#8593;tap on the man!&#8593;</div>
