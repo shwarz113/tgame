@@ -4,10 +4,10 @@
     padding: 8px;
     font-size: calc(10px + 2vmin);
     color: white;
-    min-height: calc(100vh - 16px);
-    display: grid;
-    grid-template-rows: max-content max-content auto max-content;
-    overflow: hidden;
+    /*min-height: calc(100vh - 16px);*/
+    /*display: grid;*/
+    /*grid-template-rows: max-content max-content auto max-content;*/
+    /*overflow: hidden;*/
 }
 
 .App-header {
