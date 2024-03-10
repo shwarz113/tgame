@@ -65,10 +65,11 @@ export const MainContainer = observer(() => {
 
     useEffect(() => {
         incPointsPerPeriod();
+        document.addEventListener('touchmove', (e) => e.preventDefault())
     }, []);
 
     return (
-        <div className={'main-container'} onTouchMove={(e) => e.preventDefault()}>
+        <div className={'main-container'}>
             <div className="main-container-bg" onClick={handleCoinClick}>
                 <div></div>
             </div>
