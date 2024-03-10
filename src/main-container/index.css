@@ -11,6 +11,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    touch-action: none !important;
 
     div {
         position: absolute;
