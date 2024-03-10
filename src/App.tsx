@@ -13,7 +13,7 @@ function App() {
     }, []);
 
     return (
-        <div className="App">
+        <div className="App" style={{ maxHeight: tg?.viewportHeight || 'none'}}>
             <div className="App-header">
                 {/*<div>Hello, {tg.initDataUnsafe?.user?.first_name || 'cryptoBRO'}!</div>*/}
                 <ScoreHeader />
