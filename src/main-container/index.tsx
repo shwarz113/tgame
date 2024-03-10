@@ -77,6 +77,7 @@ export const MainContainer = observer(() => {
                     <img src={store} alt="store" />
                     <div>Investments</div>
                 </div>
+                <span className="devider"></span>
                 <div id="turbo" onClick={switchOnTurboClickMode}>
                     <img src={rocket} alt="turbo" />
                     Turbo (x{TURBO_MULTIPLIER_TAP})
