@@ -56,7 +56,7 @@ export const MainContainer = observer(() => {
 
     const incPointsPerPeriod = action(() => {
         gameStore.points += gameStore.pointsPerSecond;
-        setTimeout(incPointsPerPeriod, 3000);
+        setTimeout(incPointsPerPeriod, 1000);
     })
 
     useEffect(() => {

@@ -8,7 +8,7 @@ import {useMemo} from "react";
 export const ScoreHeader = observer(() => {
     const { gameStore: { points, pointsPerSecond } } = useStore();
     const formatValue = (value: number) => nFormatter({ num: value, precision: points <= 1000 ? 0 : 3 });
-    console.log('points', points)
+
     return (
         <div className="score-header">
             <div className="score-header-points">
