@@ -1,7 +1,7 @@
 import { InvestmentsItem } from './item';
 import { instrumentsMock } from '../../constants';
 import { FC, useCallback } from 'react';
-import {getPriceValue} from "../../../utils/getPriceValue";
+import { getPriceValue } from '../../../utils/getPriceValue';
 
 type Props = {
     points: number;

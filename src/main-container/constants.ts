@@ -1,4 +1,4 @@
-import {Investments} from "./types";
+import { Investments } from './types';
 import miner from './miner.png';
 import farm from './farm.png';
 import airdrop from './airdrop.png';
@@ -12,4 +12,4 @@ export const instrumentsMock: Investments = [
     { name: 'Airdrops business', base_price: 10000, pic: airdrop, base_income: 25 },
     { name: 'P2P/Exchange business', base_price: 1000000, pic: p2p, base_income: 300 },
     { name: 'Coinface Inc.', base_price: 1000000000, pic: exchange, base_income: 4000 },
-]
+];

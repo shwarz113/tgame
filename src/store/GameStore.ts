@@ -1,7 +1,7 @@
-import { makeAutoObservable } from "mobx";
-import {Investments} from "../main-container/types";
-import {ACCUM, ACCUM_LIMIT_REFRESH_AMOUNT, DEFAULT_INC_TAP_VALUE, instrumentsLevelsMock} from "./constants";
-import {instrumentsMock} from "../main-container/constants";
+import { makeAutoObservable } from 'mobx';
+import { Investments } from '../main-container/types';
+import { ACCUM, ACCUM_LIMIT_REFRESH_AMOUNT, DEFAULT_INC_TAP_VALUE, instrumentsLevelsMock } from './constants';
+import { instrumentsMock } from '../main-container/constants';
 
 type Store = {
     points: number;
@@ -12,7 +12,7 @@ type Store = {
     accumLimitAmount: number;
     incTapValue: number;
     isTurboTapMode: boolean;
-}
+};
 const gameStore = () => {
     return makeAutoObservable<Store>({
         points: 0,

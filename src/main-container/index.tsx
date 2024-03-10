@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect, useState} from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { action } from 'mobx';
 import rocket from '../rocket.png';
 import thunder from '../thunder.png';
@@ -8,7 +8,7 @@ import { Popup } from './popups';
 import { Investments } from './popups/investments';
 import { useStore } from '../store/store';
 import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../store/constants';
-import {observer} from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
@@ -46,23 +46,26 @@ export const MainContainer = observer(() => {
     const handleBuyAction = action((name: string, points: number) => {
         gameStore.points = points;
         gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
-        gameStore.pointsPerSecond += investments.find(({ name: v}) => v === name)?.base_income || 0
+        gameStore.pointsPerSecond += investments.find(({ name: v }) => v === name)?.base_income || 0;
     });
 
-    const handleBuy = useCallback((name: string, price: number) => {
-        if (price <= points) {
-            handleBuyAction(name, points - price);
-        }
-    }, [points]);
+    const handleBuy = useCallback(
+        (name: string, price: number) => {
+            if (price <= points) {
+                handleBuyAction(name, points - price);
+            }
+        },
+        [points]
+    );
 
     const incPointsPerPeriod = action(() => {
         gameStore.points += gameStore.pointsPerSecond;
         setTimeout(incPointsPerPeriod, 1000);
-    })
+    });
 
     useEffect(() => {
         incPointsPerPeriod();
-    }, [])
+    }, []);
 
     return (
         <div className={'main-container'}>
@@ -91,4 +94,4 @@ export const MainContainer = observer(() => {
             )}
         </div>
     );
-})
+});
