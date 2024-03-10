@@ -14,8 +14,7 @@ function App() {
 
     return (
         <div className="App">
-            hello!
-            {/*<Header />*/}
+            <Header />
             {/*<MainContainer />*/}
         </div>
     );
