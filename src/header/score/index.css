@@ -4,6 +4,8 @@
     border: 4px solid gold;
     border-radius: 0 0 30px 30px;
     background: black;
+    border-top: none;
+    padding-bottom: 4px;
 }
 .score-header-points {
     display: flex;

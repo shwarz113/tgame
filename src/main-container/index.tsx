@@ -69,9 +69,6 @@ export const MainContainer = observer(() => {
             <div className="main-container-bg" onClick={handleCoinClick}>
                 <div></div>
             </div>
-            <div className="App-footer">
-                <img src={thunder} alt="energy" /> {accum} / {ACCUM}
-            </div>
             <div className={'instruments'}>
                 <div id="store" onClick={handleStoreClick}>
                     <img src={store} alt="store" />

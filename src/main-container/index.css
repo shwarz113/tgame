@@ -1,6 +1,5 @@
 .main-container {
-    /*height: calc(100vh - 240px);*/
-    /*height: 200px;*/
+    flex: 8;
 }
 .main-container-bg {
     position: relative;
@@ -11,6 +10,7 @@
     background-repeat: no-repeat;
     background-position: center;
     min-height: 200px;
+    max-height: 420px;
 
     div {
         position: absolute;
@@ -32,6 +32,7 @@
     background: #4d68a0;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 12px;
     width: 250px;
     & > div {
         position: relative;
