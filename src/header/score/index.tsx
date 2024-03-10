@@ -18,7 +18,7 @@ export const ScoreHeader = observer(() => {
                     <AnimatedNumber value={points} formatValue={formatValue} />
                 </span>
             </div>
-            <div className="score-header-points-second">{nFormatter({ num: pointsPerSecond })} / second</div>
+            <div className="score-header-points-second">{nFormatter({ num: pointsPerSecond })} / sec</div>
         </div>
     );
 });

@@ -6,11 +6,12 @@
     background: black;
     border-top: none;
     padding-bottom: 4px;
+    box-shadow: 0 0 60px 30px rgb(255 255 0 / 10%);
     transition: border-color 500ms ease-in-out, box-shadow 1s ease-in-out;
 }
 
 .score-header-light {
-    box-shadow: 0px 0px 60px 30px rgb(255 255 0 / 37%);
+    box-shadow: 0 0 60px 30px rgb(255 255 0 / 37%);
     border-color: gold;
 }
 
@@ -31,15 +32,12 @@
 
 @keyframes shadow {
     0% {
-        box-shadow: 0px 0px 41px 19px rgb(255 255 0 / 0%);
-        border-color: black;
+        box-shadow: -15px 15px 60px 30px rgb(255 255 0 / 10%);
+    }
+    50% {
+        box-shadow: 15px 15px 60px 30px rgb(255 255 0 / 10%);
     }
     100% {
-        box-shadow: 0px 0px 60px 30px rgb(255 255 0 / 37%);
-        border-color: gold;
+        box-shadow: -15px 15px 60px 30px rgb(255 255 0 / 10%);
     }
-    /*100% {*/
-    /*    box-shadow: 0px 0px 41px 19px rgb(255 255 0 / 0%);*/
-    /*    border-color: black;*/
-    /*}*/
 }

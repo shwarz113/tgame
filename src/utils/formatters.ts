@@ -17,11 +17,7 @@ export const nFormatter = ({ num, precision = 1 }: NFormatter) => {
         .reverse()
         .find((item) => num >= item.value);
     if (precision === 0) {
-        return num.toFixed(0)
+        return num.toFixed(0);
     }
-    const res = item
-        ? `${toFixed(num / item.value, precision)}`.replace(regexp, '').concat(item.symbol)
-        : toFixed(num, precision);
-    // console.log({ num, precision, item, res })
-    return res;
+    return item ? `${toFixed(num / item.value, precision)}`.concat(item.symbol) : toFixed(num, precision);
 };

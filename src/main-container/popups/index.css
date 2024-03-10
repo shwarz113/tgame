@@ -4,7 +4,8 @@
     border: 5px solid #a7bff6;
     border-radius: 8px;
     width: calc(100% - 30px);
-    height: calc(100vh - 200px);
+    height: 100%;
+    max-height: calc(100vh - 147px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
