@@ -68,7 +68,7 @@ export const MainContainer = observer(() => {
     }, []);
 
     return (
-        <div className={'main-container'} onTouchMove={(e) => console.log(e)}>
+        <div className={'main-container'} onTouchMove={(e) => e.preventDefault()}>
             <div className="main-container-bg" onClick={handleCoinClick}>
                 <div></div>
             </div>
