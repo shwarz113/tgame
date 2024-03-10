@@ -13,9 +13,10 @@ function App() {
     }, []);
 
     return (
-        <div className="App" style={{ height: tg?.viewportHeight || 'auto' }}>
-            <Header />
-            <MainContainer />
+        <div className="App">
+            hello!
+            {/*<Header />*/}
+            {/*<MainContainer />*/}
         </div>
     );
 }
