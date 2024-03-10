@@ -1,7 +1,6 @@
 .App {
     text-align: center;
     background-color: #071a2a;
-    padding: 8px;
     font-size: calc(10px + 2vmin);
     color: white;
     /*min-height: calc(100vh - 16px);*/

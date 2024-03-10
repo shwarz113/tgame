@@ -15,7 +15,8 @@ export const MainContainer = observer(() => {
     const { points, accum, incTapValue, isTurboTapMode, levelsByName, investments } = gameStore;
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
-    const handleCoinClick = action(() => {
+    const handleCoinClick = action((e: any) => {
+        e?.preventDefault();
         if (accum) {
             gameStore.points += incTapValue;
             gameStore.accum -= 1;
