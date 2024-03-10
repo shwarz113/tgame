@@ -4,7 +4,6 @@ import coin from '../../coin.png';
 import {nFormatter} from "../../utils/formatters";
 import './index.css'
 import {useStore} from "../../store/store";
-import {useMemo} from "react";
 export const ScoreHeader = observer(() => {
     const { gameStore: { points, pointsPerSecond } } = useStore();
     const formatValue = (value: number) => nFormatter({ num: value, precision: points <= 1000 ? 0 : 3 });
@@ -18,7 +17,6 @@ export const ScoreHeader = observer(() => {
                         value={points}
                         formatValue={formatValue}
                     />
-                    {/*{nFormatter({ num: number })}*/}
                 </span>
             </div>
             <div className="score-header-points-second">{nFormatter({ num: pointsPerSecond })} / second</div>

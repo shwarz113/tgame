@@ -16,4 +16,7 @@
     img {
         height: 35px;
     }
+    & > span {
+        min-width: 100px;
+    }
 }
