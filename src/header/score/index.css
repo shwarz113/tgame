@@ -1,18 +1,25 @@
 .score-header {
     position: relative;
     width: 200px;
-    border: 4px solid gold;
+    border: 6px solid black;
     border-radius: 0 0 30px 30px;
     background: black;
     border-top: none;
     padding-bottom: 4px;
+    transition: border-color 500ms ease-in-out, box-shadow 1s ease-in-out;
 }
+
+.score-header-light {
+    box-shadow: 0px 0px 60px 30px rgb(255 255 0 / 37%);
+    border-color: gold;
+}
+
 .score-header-points {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 32px;
 
     img {
         height: 35px;
@@ -20,4 +27,19 @@
     & > span {
         min-width: 100px;
     }
+}
+
+@keyframes shadow {
+    0% {
+        box-shadow: 0px 0px 41px 19px rgb(255 255 0 / 0%);
+        border-color: black;
+    }
+    100% {
+        box-shadow: 0px 0px 60px 30px rgb(255 255 0 / 37%);
+        border-color: gold;
+    }
+    /*100% {*/
+    /*    box-shadow: 0px 0px 41px 19px rgb(255 255 0 / 0%);*/
+    /*    border-color: black;*/
+    /*}*/
 }

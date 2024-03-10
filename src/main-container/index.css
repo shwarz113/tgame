@@ -1,7 +1,22 @@
 .main-container {
+    position: relative;
     flex: auto;
     display: flex;
     flex-direction: column;
+}
+.main-container-turbo-timer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    span {
+        font-size: 20px;
+        &::after {
+            content: 'sec';
+            font-size: 12px;
+        }
+    }
 }
 .main-container-bg {
     position: relative;

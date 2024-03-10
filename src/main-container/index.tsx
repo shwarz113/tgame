@@ -1,4 +1,5 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, {FC, useCallback, useEffect, useRef, useState} from 'react';
+import AnimatedNumber from 'animated-number-react';
 import { action } from 'mobx';
 import rocket from '../rocket.png';
 import thunder from '../thunder.png';
@@ -15,22 +16,46 @@ export const MainContainer = observer(() => {
     const { points, accum, incTapValue, isTurboTapMode, levelsByName, investments } = gameStore;
     const [isOpenPopup, setIsOpenPopup] = useState(false);
 
+    const timerDebounceRef = useRef<any>();
+
+    const handleTapAction = action((v: boolean) => {
+        gameStore.isTap = v;
+    })
+
+    function handleDebounceClick(){
+        // Если ID таймена установлено - сбрасываем таймер
+        if(timerDebounceRef.current){
+            clearTimeout(timerDebounceRef.current);
+        }
+        // Запускаем таймер, возвращаемое ID таймера
+        // записываем в timerDebounceRef
+        timerDebounceRef.current = setTimeout(() => {
+            // Вызываем увеличение счётчика кол-ва
+            // выполнения бизнес логики приложения с Debounce
+            handleTapAction(false);
+        }, 1000);
+    }
+
     const handleCoinClick = action((e: any) => {
         e?.preventDefault();
         if (accum) {
             gameStore.points += incTapValue;
             gameStore.accum -= 1;
+            gameStore.isTap = true;
+            handleDebounceClick();
         }
     });
 
     const switchOffTurboClickMode = action(() => {
         gameStore.incTapValue /= TURBO_MULTIPLIER_TAP;
+        gameStore.isTurboTapMode = false;
     });
 
     const switchOnTurboClickMode = action(() => {
         if (!isTurboTapMode) {
             setTimeout(() => switchOffTurboClickMode(), TURBO_TIME);
             gameStore.incTapValue += TURBO_MULTIPLIER_TAP;
+            gameStore.isTurboTapMode = true;
         }
     });
 
@@ -63,13 +88,20 @@ export const MainContainer = observer(() => {
         setTimeout(incPointsPerPeriod, 1000);
     });
 
+    const formatTimerValue = (v: number) =>((TURBO_TIME - v) / 1000).toFixed(2);
+
     useEffect(() => {
         incPointsPerPeriod();
-        document.addEventListener('touchmove', (e) => e.preventDefault())
     }, []);
 
     return (
         <div className={'main-container'}>
+            {isTurboTapMode ? (
+                <div className="main-container-turbo-timer">
+                    <div>CLICK! X5 PROFIT!</div>
+                    <AnimatedNumber value={TURBO_TIME} formatValue={formatTimerValue} duration={TURBO_TIME} />
+                </div>
+            ) : null}
             <div className="main-container-bg" onClick={handleCoinClick}>
                 <div></div>
             </div>

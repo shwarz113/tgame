@@ -12,6 +12,7 @@ type Store = {
     accumLimitAmount: number;
     incTapValue: number;
     isTurboTapMode: boolean;
+    isTap: boolean;
 };
 const gameStore = () => {
     return makeAutoObservable<Store>({
@@ -23,6 +24,7 @@ const gameStore = () => {
         accumLimitAmount: ACCUM_LIMIT_REFRESH_AMOUNT,
         incTapValue: DEFAULT_INC_TAP_VALUE,
         isTurboTapMode: false,
+        isTap: false,
     });
 };
 

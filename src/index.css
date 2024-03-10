@@ -1,6 +1,5 @@
 html {
     overflow: hidden;
-    touch-action: none !important;
 }
 body {
     margin: 0;
