@@ -4,9 +4,11 @@ import coin from '../../coin.png';
 import {nFormatter} from "../../utils/formatters";
 import './index.css'
 import {useStore} from "../../store/store";
+import {useMemo} from "react";
 export const ScoreHeader = observer(() => {
     const { gameStore: { points, pointsPerSecond } } = useStore();
-    const formatValue = (value: number) => nFormatter({ num: value});
+    const formatValue = (value: number) => nFormatter({ num: value, precision: points <= 1000 ? 0 : 3 });
+    console.log('points', points)
     return (
         <div className="score-header">
             <div className="score-header-points">
@@ -15,7 +17,6 @@ export const ScoreHeader = observer(() => {
                     <AnimatedNumber
                         value={points}
                         formatValue={formatValue}
-                        duration={100000}
                     />
                     {/*{nFormatter({ num: number })}*/}
                 </span>
