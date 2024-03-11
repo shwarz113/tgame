@@ -1,13 +1,15 @@
 import AnimatedNumber from 'animated-number-react';
-import { observer } from 'mobx-react-lite';
+import {FC} from "react";
 import coin from '../../coin.png';
 import { nFormatter } from '../../utils/formatters';
 import './index.css';
-import { useStore } from '../../store/store';
-export const ScoreHeader = observer(() => {
-    const {
-        gameStore: { points, pointsPerSecond, isTap },
-    } = useStore();
+
+type Props = {
+    points: number;
+    pointsPerSecond: number;
+    isTap: boolean;
+}
+export const ScoreHeader: FC<Props> = ({ points, pointsPerSecond, isTap}) => {
     const formatValue = (value: number) => nFormatter({ num: value, precision: points <= 1000 ? +!!pointsPerSecond : 2 });
 
     return (
@@ -21,4 +23,4 @@ export const ScoreHeader = observer(() => {
             <div className="score-header-points-second">{nFormatter({ num: pointsPerSecond })} / sec</div>
         </div>
     );
-});
+};

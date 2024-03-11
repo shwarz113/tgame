@@ -4,6 +4,8 @@ import farm from './farm.png';
 import airdrop from './airdrop.png';
 import p2p from './p2p.png';
 import exchange from './exchange.png';
+import tap from './tap.png';
+import thunder from './../thunder.png';
 
 export const PRICE_MULTIPLIER = 1.2;
 export const instrumentsMock: Investments = [
@@ -12,4 +14,8 @@ export const instrumentsMock: Investments = [
     { name: 'Airdrops business', base_price: 10000, pic: airdrop, base_income: 25 },
     { name: 'P2P/Exchange business', base_price: 1000000, pic: p2p, base_income: 300 },
     { name: 'Coinface Inc.', base_price: 1000000000, pic: exchange, base_income: 4000 },
+];
+export const upgradesMock: Investments = [
+    { name: 'Get more points per tap', base_price: 100, pic: tap, base_income: 1 },
+    { name: 'Up energy storage', base_price: 100, pic: thunder, base_income: 1 },
 ];

@@ -44,9 +44,11 @@
     justify-content: space-between;
     padding: 8px;
     border-radius: 8px;
-    background: #4d68a0;
+    background: rgba(255, 255, 255, 0.15);
     margin: 12px auto 24px;
-    width: 250px;
+    width: 80%;
+    max-width: 380px;
+    min-width: 280px;
     & > div {
         position: relative;
         display: flex;

@@ -1,20 +1,18 @@
 import { observer } from 'mobx-react-lite';
-import './index.css';
+import React from 'react';
 import { useStore } from '../store/store';
 import { ScoreHeader } from './score';
-import thunder from '../thunder.png';
-import React from 'react';
+import {Accum} from "./accum";
+import './index.css';
 export const Header = observer(() => {
     const {
-        gameStore: { accum },
+        gameStore: { accum, accumCapacity, points, pointsPerSecond, isTap },
     } = useStore();
 
     return (
         <div className="header">
-            <ScoreHeader />
-            <div className={'header-accum'}>
-                <img src={thunder} alt="energy" /> {accum}
-            </div>
+            <ScoreHeader points={points} pointsPerSecond={pointsPerSecond} isTap={isTap} />
+            <Accum accum={accum} accumCapacity={accumCapacity} />
         </div>
     );
 });

@@ -1,7 +1,7 @@
-import { FC, useCallback } from 'react';
 import { InvestmentsItem } from './item';
+import { FC, useCallback } from 'react';
 import { getPriceValue } from '../../../utils/getPriceValue';
-import { Investments as InvestmentsType } from '../../types'
+import { Investments as InvestmentsType } from '../../types';
 
 type Props = {
     points: number;
@@ -14,7 +14,7 @@ type Values = {
     price: number;
     isAvailable: boolean;
 };
-export const Investments: FC<Props> = ({ points, levels, handleBuy, list }) => {
+export const Upgrades: FC<Props> = ({ points, levels, handleBuy, list }) => {
     const getValues = useCallback(
         (name: string, base_price: number): Values => {
             const price = getPriceValue({ base_price, level: levels[name] });

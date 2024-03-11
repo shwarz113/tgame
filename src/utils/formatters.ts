@@ -11,7 +11,6 @@ export const nFormatter = ({ num, precision = 1 }: NFormatter) => {
         { value: 1e15, symbol: 'P' },
         { value: 1e18, symbol: 'E' },
     ];
-    const regexp = /\.0+$|(?<=\.[0-9]*[1-9])0+$/;
     const item = lookup
         .slice()
         .reverse()
