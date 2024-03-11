@@ -78,7 +78,6 @@ export const MainContainer = observer(() => {
     const handleBuyAction = action((name: string, points: number, isUpgrades = false) => {
         gameStore.points = points;
         gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
-        console.log({ name, isUpgrades })
         if (isUpgrades) {
             if (name === upgradesMock[0].name) gameStore.incTapValue += DEFAULT_INC_TAP_VALUE;
             if (name === upgradesMock[1].name) gameStore.accumCapacity = Math.ceil(accumCapacity * ACCUM_MULTIPLIER);
@@ -117,7 +116,7 @@ export const MainContainer = observer(() => {
                     <AnimatedNumber value={TURBO_TIME} formatValue={formatTimerValue} duration={TURBO_TIME} />
                 </div>
             ) : null}
-            <div className="main-container-bg" onTouchStart={handleCoinClick} onClick={handleCoinClick}>
+            <div className="main-container-bg" onTouchStart={handleCoinClick}>
                 <div></div>
             </div>
             <div>&#8593;tap on the man!&#8593;</div>
