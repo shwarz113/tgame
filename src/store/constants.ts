@@ -1,4 +1,4 @@
-import {instrumentsMock, upgradesMock} from '../main-container/constants';
+import {instrumentsMock, upgradesMock, upgradesRoomMock} from '../main-container/constants';
 
 export const ACCUM = 1000;
 export const ACCUM_MULTIPLIER = 1.15;
@@ -9,7 +9,7 @@ export const TURBO_MULTIPLIER_TAP = 5;
 
 export const TURBO_TIME = 10000;
 
-export const instrumentsLevelsMock: Record<string, number> = [...instrumentsMock, ...upgradesMock].reduce(
+export const instrumentsLevelsMock: Record<string, number> = [...instrumentsMock, ...upgradesMock, ...upgradesRoomMock].reduce(
     (map, { name }) => ({ ...map, [name]: 0 }),
     {}
 );

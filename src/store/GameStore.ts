@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import { Investments } from '../main-container/types';
 import { ACCUM, ACCUM_LIMIT_REFRESH_AMOUNT, DEFAULT_INC_TAP_VALUE, instrumentsLevelsMock } from './constants';
 import { instrumentsMock } from '../main-container/constants';
+import bg1 from '../main-container/bg1.png';
 
 export enum PopupsEnum {
     'INVESTMENTS' = 'INVESTMENTS',
@@ -20,6 +21,9 @@ type Store = {
     isTurboTapMode: boolean;
     isTap: boolean;
     activePopup?: PopupsEnum;
+    roomUpgrades: {
+        main: string;
+    };
 };
 const gameStore = () => {
     return makeAutoObservable<Store>({
@@ -34,6 +38,9 @@ const gameStore = () => {
         isTurboTapMode: false,
         isTap: false,
         activePopup: undefined,
+        roomUpgrades: {
+            main: bg1,
+        }
     });
 };
 

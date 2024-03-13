@@ -9,16 +9,26 @@ import './index.css';
 import { Popup } from './popups';
 import { Investments } from './popups/investments';
 import { useStore } from '../store/store';
-import {ACCUM, ACCUM_MULTIPLIER, DEFAULT_INC_TAP_VALUE, TURBO_MULTIPLIER_TAP, TURBO_TIME} from '../store/constants';
+import { ACCUM, ACCUM_MULTIPLIER, DEFAULT_INC_TAP_VALUE, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../store/constants';
 import { observer } from 'mobx-react-lite';
 import { PopupsEnum } from '../store/GameStore';
-import {Upgrades} from "./popups/upgrade";
-import {instrumentsMock, upgradesMock} from "./constants";
-import {UpgradesEnum} from "./types";
+import { Upgrades } from './popups/upgrade';
+import { instrumentsMock, upgradesMock, upgradesRoomMock } from './constants';
+import bg2 from './bg-rich.png';
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
-    const { points, accum, incTapValue, isTurboTapMode, levelsByName, investments, activePopup, accumCapacity } = gameStore;
+    const {
+        points,
+        accum,
+        incTapValue,
+        isTurboTapMode,
+        levelsByName,
+        investments,
+        activePopup,
+        accumCapacity,
+        roomUpgrades,
+    } = gameStore;
 
     const timerDebounceRef = useRef<any>();
 
@@ -81,6 +91,7 @@ export const MainContainer = observer(() => {
         if (isUpgrades) {
             if (name === upgradesMock[0].name) gameStore.incTapValue += DEFAULT_INC_TAP_VALUE;
             if (name === upgradesMock[1].name) gameStore.accumCapacity = Math.ceil(accumCapacity * ACCUM_MULTIPLIER);
+            if (upgradesRoomMock[0].name === name) gameStore.roomUpgrades.main = bg2;
         } else {
             gameStore.pointsPerSecond += investments.find(({ name: v }) => v === name)?.base_income || 0;
         }
@@ -116,7 +127,13 @@ export const MainContainer = observer(() => {
                     <AnimatedNumber value={TURBO_TIME} formatValue={formatTimerValue} duration={TURBO_TIME} />
                 </div>
             ) : null}
-            <div className="main-container-bg" onTouchStart={handleCoinClick}>
+            <div
+                className="main-container-bg"
+                style={{ backgroundImage: roomUpgrades.main }}
+                onTouchStart={handleCoinClick}
+                onClick={handleCoinClick}
+            >
+                <img src={roomUpgrades.main} />
                 <div></div>
             </div>
             <div>&#8593;tap on the man!&#8593;</div>
@@ -148,7 +165,13 @@ export const MainContainer = observer(() => {
             )}
             {activePopup === PopupsEnum.UPGRADES && (
                 <Popup title={PopupsEnum.UPGRADES} onClose={closePopup}>
-                    <Upgrades points={points} levels={levelsByName} handleBuy={handleBuyUpgrades} list={upgradesMock} />
+                    <Upgrades
+                        points={points}
+                        levels={levelsByName}
+                        handleBuy={handleBuyUpgrades}
+                        list={upgradesMock}
+                        roomsUpgrades={upgradesRoomMock}
+                    />
                 </Popup>
             )}
         </div>
