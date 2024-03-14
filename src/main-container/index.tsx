@@ -5,6 +5,8 @@ import rocket from '../rocket.png';
 import thunder from '../thunder.png';
 import store from './store.png';
 import upgrade from './upgrade.png';
+import people from './people.png';
+import box from './box.png';
 import './index.css';
 import { Popup } from './popups';
 import { Investments } from './popups/investments';
@@ -15,9 +17,11 @@ import { PopupsEnum } from '../store/GameStore';
 import { Upgrades } from './popups/upgrade';
 import { instrumentsMock, upgradesMock, upgradesRoomMock } from './constants';
 import bg2 from './bg-rich.png';
+import {useNavigate} from "react-router-dom";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
+    const navigate = useNavigate();
     const {
         points,
         accum,
@@ -75,6 +79,13 @@ export const MainContainer = observer(() => {
     const openUpgradesPopup = action(() => {
         gameStore.activePopup = PopupsEnum.UPGRADES;
     });
+
+    const openPeoplePage = () => {
+        navigate('/people');
+    };
+    const openLootboxPage = () => {
+        navigate('/loot');
+    };
 
     const closePopup = action(() => {
         gameStore.activePopup = undefined;
@@ -148,15 +159,24 @@ export const MainContainer = observer(() => {
                     <div>Upgrades</div>
                 </div>
                 <span className="devider"></span>
-                <div id="turbo" onClick={switchOnTurboClickMode}>
-                    <img src={rocket} alt="turbo" />
-                    Turbo (x{TURBO_MULTIPLIER_TAP})
+                <div id="lootbox" onClick={openLootboxPage}>
+                    <img src={box} alt="box" />
+                    <div>Lootbox</div>
                 </div>
                 <span className="devider"></span>
-                <div id="accum" onClick={handleAccumClick}>
-                    <img src={thunder} alt="energy" />
-                    Energy
+                <div id="people" onClick={openPeoplePage}>
+                    <img src={people} alt="people" />
+                    <div>People</div>
                 </div>
+                {/*<div id="turbo" onClick={switchOnTurboClickMode}>*/}
+                {/*    <img src={rocket} alt="turbo" />*/}
+                {/*    Turbo (x{TURBO_MULTIPLIER_TAP})*/}
+                {/*</div>*/}
+                {/*<span className="devider"></span>*/}
+                {/*<div id="accum" onClick={handleAccumClick}>*/}
+                {/*    <img src={thunder} alt="energy" />*/}
+                {/*    Energy*/}
+                {/*</div>*/}
             </div>
             {activePopup === PopupsEnum.INVESTMENTS && (
                 <Popup title={PopupsEnum.INVESTMENTS} onClose={closePopup}>

@@ -1,0 +1,32 @@
+.lootbox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+}
+.lootbox-container-title {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+.lootbox-container-description {
+    font-size: 14px;
+}
+
+.lootbox-container-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

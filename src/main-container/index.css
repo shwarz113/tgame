@@ -67,3 +67,12 @@
         }
     }
 }
+
+#lootbox {
+    justify-content: space-between;
+    img {
+        width: 30px;
+        height: auto;
+        padding: 4px 0;
+    }
+}

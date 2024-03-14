@@ -1,0 +1,29 @@
+.people-container-tabs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.people-container-tab {
+    font-size: 12px;
+    padding: 12px;
+    cursor: pointer;
+    &.active {
+        text-decoration: underline;
+    }
+}
+
+.person-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px;
+}
+
+.person-pic {
+    margin-right: 12px;
+}

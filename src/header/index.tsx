@@ -4,6 +4,7 @@ import { useStore } from '../store/store';
 import { ScoreHeader } from './score';
 import {Accum} from "./accum";
 import './index.css';
+import {Link} from "react-router-dom";
 export const Header = observer(() => {
     const {
         gameStore: { accum, accumCapacity, points, pointsPerSecond, isTap },

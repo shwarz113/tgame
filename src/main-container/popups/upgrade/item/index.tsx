@@ -18,7 +18,7 @@ export const InvestmentsItem: FC<Props> = ({
     price,
     isAvailable,
     handleBuy,
-                                               postSymbol,
+    postSymbol,
 }) => {
     const onClick = () => handleBuy(name, price);
     return (
@@ -30,7 +30,14 @@ export const InvestmentsItem: FC<Props> = ({
                 <div>{name}</div>
                 <div>
                     <div className="investments-item-content-info">
-                        {level ? <div>+{nFormatter({ num: base_income * level })}{postSymbol || ''}</div> : <div> </div>}
+                        {level ? (
+                            <div>
+                                +{nFormatter({ num: base_income * level })}
+                                {postSymbol || ''}
+                            </div>
+                        ) : (
+                            <div> </div>
+                        )}
                         <div className={'investments-item-content-info-level'}>
                             <div style={{ width: `${(level % 10) * 10}%` }}></div>
                             <div>{level} level</div>
@@ -38,7 +45,10 @@ export const InvestmentsItem: FC<Props> = ({
                     </div>
                     <div className={`investments-item-content-buy ${isAvailable ? 'available' : ''}`}>
                         <div onClick={onClick}>{nFormatter({ num: price })}</div>
-                        <div>+{nFormatter({ num: base_income })}{postSymbol || ''}</div>
+                        <div>
+                            +{nFormatter({ num: base_income })}
+                            {postSymbol || ''}
+                        </div>
                     </div>
                 </div>
             </div>

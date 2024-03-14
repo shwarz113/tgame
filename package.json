@@ -15,7 +15,9 @@
     "mobx-react-lite": "^4.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "swiper": "^11.0.7",
     "telegram-webapps-types": "^1.0.5",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
