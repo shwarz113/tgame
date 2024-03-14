@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { MainContainer } from './main-container';
 import './App.css';
 import { Header } from './header';
-import {BrowserRouter, Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {PeopleContainer} from "./people";
 import {LootboxContainer} from "./lootbox";
-
+export const DOMAIN = '/tgame'
 // @ts-ignore
 const tg = window.Telegram.WebApp;
 function App() {
@@ -14,7 +14,7 @@ function App() {
     console.log('tg', tg);
     const BackButton = tg.BackButton;
     BackButton.onClick(function() {
-        navigate('/');
+        navigate(DOMAIN);
     });
 
     useEffect(() => {
@@ -23,20 +23,22 @@ function App() {
     }, []);
 
     useEffect(() => {
-        if (pathname === '/') {
+        if (pathname === DOMAIN) {
             BackButton.hide();
         } else {
             BackButton.show();
         }
     }, [pathname])
 
+    console.log('pathname', pathname);
+
     return (
         <div className="App">
             <Header />
             <Routes>
-                <Route path={'/'} element={<MainContainer />}/>
-                <Route path={'people'} element={<PeopleContainer />}/>
-                <Route path={'loot'} element={<LootboxContainer />}/>
+                <Route path={DOMAIN} element={<MainContainer />}/>
+                <Route path={`${DOMAIN}/people`} element={<PeopleContainer />}/>
+                <Route path={`${DOMAIN}/loot`} element={<LootboxContainer />}/>
             </Routes>
         </div>
     );

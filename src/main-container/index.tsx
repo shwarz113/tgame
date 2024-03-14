@@ -18,6 +18,7 @@ import { Upgrades } from './popups/upgrade';
 import { instrumentsMock, upgradesMock, upgradesRoomMock } from './constants';
 import bg2 from './bg-rich.png';
 import {useNavigate} from "react-router-dom";
+import {DOMAIN} from "../App";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
@@ -81,10 +82,10 @@ export const MainContainer = observer(() => {
     });
 
     const openPeoplePage = () => {
-        navigate('/people');
+        navigate(`${DOMAIN}/people`);
     };
     const openLootboxPage = () => {
-        navigate('/loot');
+        navigate(`${DOMAIN}/loot`);
     };
 
     const closePopup = action(() => {
