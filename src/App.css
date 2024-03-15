@@ -7,6 +7,10 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 .fake-scroll {
     height: calc(100vh + 1px);
