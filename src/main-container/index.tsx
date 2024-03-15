@@ -129,6 +129,9 @@ export const MainContainer = observer(() => {
 
     useEffect(() => {
         incPointsPerPeriod();
+        document.querySelector('.main-container-bg')?.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        })
     }, []);
 
     return (

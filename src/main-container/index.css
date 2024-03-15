@@ -28,6 +28,13 @@
     width: 100%;
     height: calc(100% - 134px);
     overflow: scroll;
+    touch-action: none;
+    &::-webkit-scrollbar {
+        display: none;
+        -webkit-appearance: none;
+        width: 0;
+        height: 0;
+    }
     img {
         max-width: 100%;
         max-height: 100%;
