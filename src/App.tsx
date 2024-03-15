@@ -16,12 +16,9 @@ function App() {
     BackButton.onClick(function() {
         navigate(DOMAIN);
     });
-    tg.onEvent('viewportChanged', (e: any) => {
-        tg?.expand();
-    });
 
     window.addEventListener('touchmove', (e) => {
-
+        tg?.expand();
     })
 
     useEffect(() => {
