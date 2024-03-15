@@ -82,10 +82,10 @@ export const MainContainer = observer(() => {
     });
 
     const openPeoplePage = () => {
-        navigate(`${DOMAIN}/people`);
+        navigate(`${DOMAIN}people`);
     };
     const openLootboxPage = () => {
-        navigate(`${DOMAIN}/loot`);
+        navigate(`${DOMAIN}loot`);
     };
 
     const closePopup = action(() => {
