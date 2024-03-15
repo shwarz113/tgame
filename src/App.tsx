@@ -16,9 +16,13 @@ function App() {
     BackButton.onClick(function() {
         navigate(DOMAIN);
     });
+    tg.offEvent((e: any) => {
+        console.log('offEvent', e);
+    })
 
     useEffect(() => {
         tg?.expand();
+        tg?.colorScheme === "dark";
     }, []);
 
     useEffect(() => {
