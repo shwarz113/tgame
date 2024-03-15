@@ -32,6 +32,8 @@ function App() {
         }
     }, [pathname])
 
+    console.log('NODE_ENV', process.env.NODE_ENV)
+
     return (
         <div className="App">
             <Header />
