@@ -17,14 +17,11 @@ function App() {
         navigate(DOMAIN);
     });
     tg.onEvent('viewportChanged', (e: any) => {
-        console.log('viewportChanged');
-        console.log('e', e)
+        tg?.expand();
     });
 
     window.addEventListener('touchmove', (e) => {
-        console.log('touchmove');
-        console.log('e', e);
-        e.preventDefault();
+
     })
 
     useEffect(() => {
