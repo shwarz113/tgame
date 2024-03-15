@@ -16,8 +16,15 @@ function App() {
     BackButton.onClick(function() {
         navigate(DOMAIN);
     });
-    tg.offEvent((e: any) => {
-        console.log('offEvent', e);
+    tg.onEvent('viewportChanged', (e: any) => {
+        console.log('viewportChanged');
+        console.log('e', e)
+    });
+
+    window.addEventListener('touchmove', (e) => {
+        console.log('touchmove');
+        console.log('e', e);
+        e.preventDefault();
     })
 
     useEffect(() => {
