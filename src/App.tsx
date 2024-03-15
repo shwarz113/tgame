@@ -19,18 +19,18 @@ function App() {
 
     useEffect(() => {
         tg?.expand();
-
     }, []);
 
     useEffect(() => {
+        console.log('pathname', pathname);
         if (pathname === DOMAIN) {
+            console.log('DOMAIN')
             BackButton.hide();
         } else {
+            console.log('NOT DOMAIN')
             BackButton.show();
         }
     }, [pathname])
-
-    console.log('pathname', pathname);
 
     return (
         <div className="App">
