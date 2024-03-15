@@ -146,6 +146,7 @@ export const MainContainer = observer(() => {
                 onClick={handleCoinClick}
             >
                 <img src={roomUpgrades.main} />
+                <div className="fake-scroll"></div>
                 <div></div>
             </div>
             <div>&#8593;tap on the man!&#8593;</div>

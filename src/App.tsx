@@ -36,7 +36,6 @@ function App() {
 
     return (
         <div className="App">
-            <div className="fake-scroll"></div>
             <Header />
             <Routes>
                 <Route path={DOMAIN} element={<MainContainer />}/>
