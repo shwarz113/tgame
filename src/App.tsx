@@ -22,7 +22,6 @@ function App() {
 
     useEffect(() => {
         tg?.expand();
-        tg?.colorScheme === "dark";
     }, []);
 
     useEffect(() => {
