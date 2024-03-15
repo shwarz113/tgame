@@ -22,6 +22,7 @@ function App() {
 
     useEffect(() => {
         tg?.expand();
+        tg?.setHeaderColor('#000');
     }, []);
 
     useEffect(() => {
