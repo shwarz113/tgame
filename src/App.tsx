@@ -5,7 +5,7 @@ import { Header } from './header';
 import {Route, Routes, useLocation, useNavigate} from "react-router-dom";
 import {PeopleContainer} from "./people";
 import {LootboxContainer} from "./lootbox";
-export const DOMAIN = '/tgame/'
+export const DOMAIN = process.env.NODE_ENV === 'production' ? '/tgame/': '/' ;
 // @ts-ignore
 const tg = window.Telegram.WebApp;
 function App() {
@@ -22,17 +22,12 @@ function App() {
     }, []);
 
     useEffect(() => {
-        console.log('pathname', pathname);
         if (pathname === DOMAIN) {
-            console.log('DOMAIN')
             BackButton.hide();
         } else {
-            console.log('NOT DOMAIN')
             BackButton.show();
         }
     }, [pathname])
-
-    console.log('NODE_ENV', process.env.NODE_ENV)
 
     return (
         <div className="App">
