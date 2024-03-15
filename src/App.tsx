@@ -13,9 +13,9 @@ function App() {
     const navigate = useNavigate();
     console.log('tg', tg);
     const BackButton = tg.BackButton;
-    // BackButton.onClick(function() {
-    //     navigate(DOMAIN);
-    // });
+    BackButton.onClick(function() {
+        navigate(`${DOMAIN}/`);
+    });
 
     useEffect(() => {
         tg?.expand();
