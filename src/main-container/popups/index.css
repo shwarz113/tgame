@@ -19,11 +19,11 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    span {
-        position: absolute;
-        right: 5px;
-        cursor: pointer;
-    }
+}
+.popup-title span {
+    position: absolute;
+    right: 5px;
+    cursor: pointer;
 }
 
 .popup-body {

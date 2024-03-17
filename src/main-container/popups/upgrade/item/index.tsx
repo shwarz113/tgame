@@ -1,7 +1,5 @@
 import { InvestmentItem } from '../../../types';
 import { FC } from 'react';
-import { PRICE_MULTIPLIER } from '../../../constants';
-import './index.css';
 import { nFormatter } from '../../../../utils/formatters';
 
 type Props = {
