@@ -13,6 +13,7 @@ import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {DOMAIN} from "../../App";
+import {Task} from "./task";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
@@ -116,6 +117,7 @@ export const MainContainer = observer(() => {
                 <div></div>
             </div>
             <div>&#8593;tap on the man!&#8593;</div>
+            <Task />
             <div className={'instruments'}>
                 <div id="store" onClick={openInvestmentsPopup}>
                     <img src={store} alt="store" />
