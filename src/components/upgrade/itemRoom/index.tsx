@@ -1,7 +1,7 @@
-import { InvestmentItem } from '../../../types';
+import { InvestmentItem } from '../../main-container/types';
 import { FC } from 'react';
 import './index.css';
-import { nFormatter } from '../../../../utils/formatters';
+import { nFormatter } from '../../../utils/formatters';
 
 type Props = {
     data: InvestmentItem;

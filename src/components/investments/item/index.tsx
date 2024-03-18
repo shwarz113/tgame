@@ -1,6 +1,8 @@
-import { InvestmentItem } from '../../../types';
+import { InvestmentItem } from '../../main-container/types';
 import { FC } from 'react';
-import { nFormatter } from '../../../../utils/formatters';
+import { PRICE_MULTIPLIER } from '../../main-container/constants';
+import './index.css';
+import { nFormatter } from '../../../utils/formatters';
 
 type Props = {
     data: InvestmentItem;
@@ -8,7 +10,6 @@ type Props = {
     price: number;
     isAvailable: boolean;
     handleBuy: (name: string, price: number) => void;
-    postSymbol?: string;
 };
 export const InvestmentsItem: FC<Props> = ({
     data: { name, pic, base_income },
@@ -16,7 +17,6 @@ export const InvestmentsItem: FC<Props> = ({
     price,
     isAvailable,
     handleBuy,
-    postSymbol,
 }) => {
     const onClick = () => handleBuy(name, price);
     return (
@@ -28,14 +28,7 @@ export const InvestmentsItem: FC<Props> = ({
                 <div>{name}</div>
                 <div>
                     <div className="investments-item-content-info">
-                        {level ? (
-                            <div>
-                                +{nFormatter({ num: base_income * level })}
-                                {postSymbol || ''}
-                            </div>
-                        ) : (
-                            <div> </div>
-                        )}
+                        {level ? <div>+{nFormatter({ num: base_income * level })}/s</div> : <div> </div>}
                         <div className={'investments-item-content-info-level'}>
                             <div style={{ width: `${(level % 10) * 10}%` }}></div>
                             <div>{level} level</div>
@@ -43,10 +36,7 @@ export const InvestmentsItem: FC<Props> = ({
                     </div>
                     <div className={`investments-item-content-buy ${isAvailable ? 'available' : ''}`}>
                         <div onClick={onClick}>{nFormatter({ num: price })}</div>
-                        <div>
-                            +{nFormatter({ num: base_income })}
-                            {postSymbol || ''}
-                        </div>
+                        <div>+{nFormatter({ num: base_income })}/s</div>
                     </div>
                 </div>
             </div>

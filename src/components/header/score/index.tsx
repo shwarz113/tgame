@@ -1,7 +1,7 @@
 import AnimatedNumber from 'animated-number-react';
 import {FC} from "react";
-import coin from '../../coin.png';
-import { nFormatter } from '../../utils/formatters';
+import coin from '../../../coin.png';
+import { nFormatter } from '../../../utils/formatters';
 import './index.css';
 
 type Props = {

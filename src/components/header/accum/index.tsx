@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import thunder from '../../thunder.png';
+import thunder from '../../../thunder.png';
 import './index.css';
 
 type Props = {

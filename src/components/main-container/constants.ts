@@ -6,7 +6,7 @@ import p2p from './p2p.png';
 import exchange from './exchange.png';
 import tap from './tap.png';
 import scyscrapper from './scyscrapper.png';
-import thunder from './../thunder.png';
+import thunder from '../../thunder.png';
 
 export const PRICE_MULTIPLIER = 1.2;
 export const instrumentsMock: Investments = [

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import AnimatedNumber from 'animated-number-react';
 import { action } from 'mobx';
 import rocket from '../rocket.png';
@@ -8,29 +8,19 @@ import upgrade from './upgrade.png';
 import people from './people.png';
 import box from './box.png';
 import './index.css';
-import { Popup } from './popups';
-import { Investments } from './popups/investments';
-import { useStore } from '../store/store';
-import { ACCUM, ACCUM_MULTIPLIER, DEFAULT_INC_TAP_VALUE, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../store/constants';
+import { useStore } from '../../store/store';
+import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
-import { PopupsEnum } from '../store/GameStore';
-import { Upgrades } from './popups/upgrade';
-import { instrumentsMock, upgradesMock, upgradesRoomMock } from './constants';
-import bg2 from './bg-rich.png';
 import {useNavigate} from "react-router-dom";
-import {DOMAIN} from "../App";
+import {DOMAIN} from "../../App";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
     const navigate = useNavigate();
     const {
-        points,
         accum,
         incTapValue,
         isTurboTapMode,
-        levelsByName,
-        investments,
-        activePopup,
         accumCapacity,
         roomUpgrades,
     } = gameStore;
@@ -74,11 +64,11 @@ export const MainContainer = observer(() => {
     });
 
     const openInvestmentsPopup = action(() => {
-        gameStore.activePopup = PopupsEnum.INVESTMENTS;
+        navigate(`${DOMAIN}invest`);
     });
 
     const openUpgradesPopup = action(() => {
-        gameStore.activePopup = PopupsEnum.UPGRADES;
+        navigate(`${DOMAIN}upgrades`);
     });
 
     const openPeoplePage = () => {
@@ -87,38 +77,11 @@ export const MainContainer = observer(() => {
     const openLootboxPage = () => {
         navigate(`${DOMAIN}loot`);
     };
-
-    const closePopup = action(() => {
-        gameStore.activePopup = undefined;
-    });
     const handleAccumClick = action(() => {
         if (accum !== ACCUM) {
             gameStore.accum = accumCapacity;
         }
     });
-
-    const handleBuyAction = action((name: string, points: number, isUpgrades = false) => {
-        gameStore.points = points;
-        gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
-        if (isUpgrades) {
-            if (name === upgradesMock[0].name) gameStore.incTapValue += DEFAULT_INC_TAP_VALUE;
-            if (name === upgradesMock[1].name) gameStore.accumCapacity = Math.ceil(accumCapacity * ACCUM_MULTIPLIER);
-            if (upgradesRoomMock[0].name === name) gameStore.roomUpgrades.main = bg2;
-        } else {
-            gameStore.pointsPerSecond += investments.find(({ name: v }) => v === name)?.base_income || 0;
-        }
-    });
-
-    const handleBuy = useCallback(
-        (name: string, price: number, isUpgrades = false) => {
-            if (price <= points) {
-                handleBuyAction(name, points - price, isUpgrades);
-            }
-        },
-        [points]
-    );
-
-    const handleBuyUpgrades = (name: string, price: number) => handleBuy(name, price, true);
 
     const incPointsPerPeriod = action(() => {
         gameStore.points += gameStore.pointsPerSecond;
@@ -183,22 +146,6 @@ export const MainContainer = observer(() => {
                 {/*    Energy*/}
                 {/*</div>*/}
             </div>
-            {activePopup === PopupsEnum.INVESTMENTS && (
-                <Popup title={PopupsEnum.INVESTMENTS} onClose={closePopup}>
-                    <Investments points={points} levels={levelsByName} handleBuy={handleBuy} list={instrumentsMock} />
-                </Popup>
-            )}
-            {activePopup === PopupsEnum.UPGRADES && (
-                <Popup title={PopupsEnum.UPGRADES} onClose={closePopup}>
-                    <Upgrades
-                        points={points}
-                        levels={levelsByName}
-                        handleBuy={handleBuyUpgrades}
-                        list={upgradesMock}
-                        roomsUpgrades={upgradesRoomMock}
-                    />
-                </Popup>
-            )}
         </div>
     );
 });

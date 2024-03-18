@@ -1,5 +1,5 @@
 import box from "../main-container/box.png";
-import {nFormatter} from "../utils/formatters";
+import {nFormatter} from "../../utils/formatters";
 import { Swiper, SwiperSlide } from "swiper/react";
 import './index.css';
 import 'swiper/css';

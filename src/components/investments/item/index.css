@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    background: #4d68a0;
-    border-bottom: 4px solid #a7bff6;
+    background: #294580de;
+    margin-bottom: 4px;
     padding: 10px 20px;
     font-size: 16px;
 }

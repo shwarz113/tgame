@@ -1,4 +1,4 @@
-import {instrumentsMock, upgradesMock, upgradesRoomMock} from '../main-container/constants';
+import {instrumentsMock, upgradesMock, upgradesRoomMock} from '../components/main-container/constants';
 
 export const ACCUM = 1000;
 export const ACCUM_MULTIPLIER = 1.15;

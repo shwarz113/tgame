@@ -1,4 +1,4 @@
-import { PRICE_MULTIPLIER } from '../main-container/constants';
+import { PRICE_MULTIPLIER } from '../components/main-container/constants';
 
 type GetPriceValue = {
     base_price: number;
