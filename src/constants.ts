@@ -1,1 +1,1 @@
-export const SOCKET_URL = 'ws://tgame-crypto-coin-kagertanin.amvera.io/connect'
+export const SOCKET_URL = 'wss://tgame-crypto-coin-kagertanin.amvera.io/connect'
