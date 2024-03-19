@@ -13,7 +13,7 @@ import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
-import {DOMAIN} from "../../constants";
+import {DOMAIN, PagesEnum} from "../../constants";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
@@ -65,18 +65,18 @@ export const MainContainer = observer(() => {
     });
 
     const openInvestmentsPopup = action(() => {
-        navigate(`${DOMAIN}invest`);
+        navigate(`${DOMAIN}${PagesEnum.INVEST}`);
     });
 
     const openUpgradesPopup = action(() => {
-        navigate(`${DOMAIN}upgrades`);
+        navigate(`${DOMAIN}${PagesEnum.UPGRADES}`);
     });
 
     const openPeoplePage = () => {
-        navigate(`${DOMAIN}people`);
+        navigate(`${DOMAIN}${PagesEnum.PEOPLE}`);
     };
     const openLootboxPage = () => {
-        navigate(`${DOMAIN}loot`);
+        navigate(`${DOMAIN}${PagesEnum.LOOT}`);
     };
     const handleAccumClick = action(() => {
         if (accum !== ACCUM) {

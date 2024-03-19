@@ -4,7 +4,7 @@ import { MainContainer } from './components/main-container';
 import { Header } from './components/header';
 import { PeopleContainer } from './components/people';
 import { LootboxContainer } from './components/lootbox';
-import { DOMAIN } from './constants';
+import {DOMAIN, PagesEnum} from './constants';
 import { instrumentsMock, upgradesMock, upgradesRoomMock } from './components/main-container/constants';
 import { Investments } from './components/investments';
 import { Upgrades } from './components/upgrade';
@@ -23,11 +23,11 @@ function App() {
             <Header />
             <Routes>
                 <Route path={DOMAIN} element={<MainContainer />} />
-                <Route path={`${DOMAIN}people`} element={<PeopleContainer />} />
-                <Route path={`${DOMAIN}loot`} element={<LootboxContainer />} />
-                <Route path={`${DOMAIN}invest`} element={<Investments list={instrumentsMock} />} />
+                <Route path={`${DOMAIN}${PagesEnum.PEOPLE}`} element={<PeopleContainer />} />
+                <Route path={`${DOMAIN}${PagesEnum.LOOT}`} element={<LootboxContainer />} />
+                <Route path={`${DOMAIN}${PagesEnum.INVEST}`} element={<Investments list={instrumentsMock} />} />
                 <Route
-                    path={`${DOMAIN}upgrades`}
+                    path={`${DOMAIN}${PagesEnum.UPGRADES}`}
                     element={<Upgrades list={upgradesMock} roomsUpgrades={upgradesRoomMock} />}
                 />
             </Routes>

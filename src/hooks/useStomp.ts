@@ -8,7 +8,7 @@ type ReturnHook = {
 export const useStomp = (): ReturnHook => {
     const client = useRef<Client>();
     // @ts-ignore
-    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.usernames || 'shwarz777'
+    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.usernames || 'это тест (значит usernames не считался)'
 
     console.log('useStomp');
 
