@@ -5,9 +5,7 @@ import { Investments as InvestmentsType } from '../main-container/types'
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../store/store";
 import {action} from "mobx";
-import {upgradesMock, upgradesRoomMock} from "../main-container/constants";
-import {ACCUM_MULTIPLIER, DEFAULT_INC_TAP_VALUE} from "../../store/constants";
-import bg2 from "../main-container/bg-rich.png";
+import './index.css';
 
 type Props = {
     list: InvestmentsType;

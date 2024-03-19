@@ -18,6 +18,10 @@ export const Init = memo(() => {
     }, []);
 
     useEffect(() => {
+        if (!tg?.isExpanded) tg?.expand();
+    }, [tg?.isExpanded]);
+
+    useEffect(() => {
         if (pathname === DOMAIN) {
             BackButton.hide();
         } else {
