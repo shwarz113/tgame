@@ -2,11 +2,14 @@ import { FC, useCallback } from 'react';
 import { InvestmentsItem } from './item';
 import { getPriceValue } from '../../utils/getPriceValue';
 import { Investments as InvestmentsType } from '../main-container/types'
+import {observer} from "mobx-react-lite";
+import {useStore} from "../../store/store";
+import {action} from "mobx";
+import {upgradesMock, upgradesRoomMock} from "../main-container/constants";
+import {ACCUM_MULTIPLIER, DEFAULT_INC_TAP_VALUE} from "../../store/constants";
+import bg2 from "../main-container/bg-rich.png";
 
 type Props = {
-    points: number;
-    levels: Record<string, number>;
-    handleBuy: (name: string, price: number) => void;
     list: InvestmentsType;
 };
 
@@ -14,12 +17,29 @@ type Values = {
     price: number;
     isAvailable: boolean;
 };
-export const Investments: FC<Props> = ({ points, levels, handleBuy, list }) => {
+export const Investments: FC<Props> = observer(({ list }) => {
+    const { gameStore } = useStore();
+    const { points, investments, levelsByName } = gameStore;
     const getValues = useCallback(
         (name: string, base_price: number): Values => {
-            const price = getPriceValue({ base_price, level: levels[name] });
+            const price = getPriceValue({ base_price, level: levelsByName[name] });
             const isAvailable = price <= points;
             return { price, isAvailable };
+        },
+        [points]
+    );
+
+    const handleBuyAction = action((name: string, points: number) => {
+        gameStore.points = points;
+        gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
+        gameStore.pointsPerSecond += investments.find(({ name: v }) => v === name)?.base_income || 0;
+    });
+
+    const handleBuy = useCallback(
+        (name: string, price: number, isUpgrades = false) => {
+            if (price <= points) {
+                handleBuyAction(name, points - price);
+            }
         },
         [points]
     );
@@ -30,11 +50,11 @@ export const Investments: FC<Props> = ({ points, levels, handleBuy, list }) => {
                 <InvestmentsItem
                     key={v.name}
                     data={v}
-                    level={levels[v.name]}
+                    level={levelsByName[v.name]}
                     handleBuy={handleBuy}
                     {...getValues(v.name, v.base_price)}
                 />
             ))}
         </div>
     );
-};
+});

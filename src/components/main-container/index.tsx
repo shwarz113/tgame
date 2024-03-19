@@ -12,8 +12,8 @@ import { useStore } from '../../store/store';
 import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
-import {DOMAIN} from "../../App";
 import {Task} from "./task";
+import {DOMAIN} from "../../constants";
 
 export const MainContainer = observer(() => {
     const { gameStore } = useStore();
