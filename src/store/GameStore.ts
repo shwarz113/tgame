@@ -28,7 +28,7 @@ type Store = {
 const gameStore = () => {
     return makeAutoObservable<Store>({
         points: 0,
-        pointsPerSecond: 0,
+        pointsPerSecond: 1,
         investments: instrumentsMock,
         levelsByName: instrumentsLevelsMock,
         accum: ACCUM,

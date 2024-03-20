@@ -15,6 +15,9 @@ export const Init = memo(() => {
     useEffect(() => {
         tg?.expand();
         tg?.setHeaderColor('#000');
+        document.querySelector('.main-container-bg')?.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        })
     }, []);
 
     useEffect(() => {

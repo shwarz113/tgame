@@ -1,15 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import AnimatedNumber from 'animated-number-react';
 import { action } from 'mobx';
-import rocket from '../rocket.png';
-import thunder from '../thunder.png';
 import store from './store.png';
 import upgrade from './upgrade.png';
 import people from './people.png';
 import box from './box.png';
 import './index.css';
 import { useStore } from '../../store/store';
-import { ACCUM, TURBO_MULTIPLIER_TAP, TURBO_TIME } from '../../store/constants';
+import { TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
@@ -22,21 +20,20 @@ export const MainContainer = observer(() => {
         accum,
         incTapValue,
         isTurboTapMode,
-        accumCapacity,
         roomUpgrades,
     } = gameStore;
 
-    const timerDebounceRef = useRef<any>();
+    const tapTimerDebounceRef = useRef<any>();
 
     const handleTapAction = action((v: boolean) => {
         gameStore.isTap = v;
     });
 
     function handleDebounceClick() {
-        if (timerDebounceRef.current) {
-            clearTimeout(timerDebounceRef.current);
+        if (tapTimerDebounceRef.current) {
+            clearTimeout(tapTimerDebounceRef.current);
         }
-        timerDebounceRef.current = setTimeout(() => {
+        tapTimerDebounceRef.current = setTimeout(() => {
             handleTapAction(false);
         }, 1000);
     }
@@ -48,19 +45,6 @@ export const MainContainer = observer(() => {
             gameStore.accum -= 1;
             gameStore.isTap = true;
             handleDebounceClick();
-        }
-    });
-
-    const switchOffTurboClickMode = action(() => {
-        gameStore.incTapValue /= TURBO_MULTIPLIER_TAP;
-        gameStore.isTurboTapMode = false;
-    });
-
-    const switchOnTurboClickMode = action(() => {
-        if (!isTurboTapMode) {
-            setTimeout(() => switchOffTurboClickMode(), TURBO_TIME);
-            gameStore.incTapValue *= TURBO_MULTIPLIER_TAP;
-            gameStore.isTurboTapMode = true;
         }
     });
 
@@ -78,25 +62,8 @@ export const MainContainer = observer(() => {
     const openLootboxPage = () => {
         navigate(`${DOMAIN}${PagesEnum.LOOT}`);
     };
-    const handleAccumClick = action(() => {
-        if (accum !== ACCUM) {
-            gameStore.accum = accumCapacity;
-        }
-    });
-
-    const incPointsPerPeriod = action(() => {
-        gameStore.points += gameStore.pointsPerSecond;
-        setTimeout(incPointsPerPeriod, 1000);
-    });
 
     const formatTimerValue = (v: number) => ((TURBO_TIME - v) / 1000).toFixed(2);
-
-    useEffect(() => {
-        incPointsPerPeriod();
-        document.querySelector('.main-container-bg')?.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-        })
-    }, []);
 
     return (
         <div className={'main-container'}>
@@ -138,15 +105,6 @@ export const MainContainer = observer(() => {
                     <img src={people} alt="people" />
                     <div>People</div>
                 </div>
-                {/*<div id="turbo" onClick={switchOnTurboClickMode}>*/}
-                {/*    <img src={rocket} alt="turbo" />*/}
-                {/*    Turbo (x{TURBO_MULTIPLIER_TAP})*/}
-                {/*</div>*/}
-                {/*<span className="devider"></span>*/}
-                {/*<div id="accum" onClick={handleAccumClick}>*/}
-                {/*    <img src={thunder} alt="energy" />*/}
-                {/*    Energy*/}
-                {/*</div>*/}
             </div>
         </div>
     );
