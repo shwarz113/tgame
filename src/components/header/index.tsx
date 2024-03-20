@@ -10,9 +10,8 @@ export const Header = observer(() => {
     const { accum, accumCapacity, points, pointsPerSecond, isTap } = gameStore;
 
     const handleIncPointsAction = action(() => {
-        console.log('time!!');
         setTimeout(() => {
-            gameStore.points += gameStore.pointsPerSecond;
+            if (gameStore.pointsPerSecond) gameStore.points += gameStore.pointsPerSecond;
             handleIncPointsAction();
         }, 1000);
     });
@@ -20,8 +19,6 @@ export const Header = observer(() => {
     useEffect(() => {
         handleIncPointsAction();
     }, []);
-
-    console.log('Header')
 
     return (
         <div className="header">
