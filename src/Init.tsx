@@ -1,6 +1,6 @@
-import {DOMAIN} from "./constants";
-import {useLocation, useNavigate} from "react-router-dom";
-import {memo, useEffect} from "react";
+import { DOMAIN } from './constants';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { memo, useEffect } from 'react';
 // @ts-ignore
 const tg = window.Telegram.WebApp;
 export const Init = memo(() => {
@@ -18,7 +18,7 @@ export const Init = memo(() => {
     }, []);
 
     useEffect(() => {
-        if (!tg?.isExpanded) tg?.expand();
+        tg?.onEvent('viewportChanged', () => tg?.expand());
     }, [tg?.isExpanded]);
 
     useEffect(() => {
@@ -29,5 +29,5 @@ export const Init = memo(() => {
         }
     }, [pathname]);
 
-    return <></>
+    return <></>;
 });
