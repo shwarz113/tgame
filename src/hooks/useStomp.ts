@@ -17,7 +17,7 @@ export const useStomp = (): ReturnHook => {
             brokerURL: SOCKET_URL,
             onConnect: () => {
                 client.current?.publish({ destination: '/ws/user', body: JSON.stringify({ userId }) });
-                client.current?.subscribe('/topic/user', (message) => console.log(`Received: ${message.body}`));
+                client.current?.subscribe('/user/topic/user', (message) => console.log(`Received: ${message.body}`));
             },
         });
         client.current?.activate();
