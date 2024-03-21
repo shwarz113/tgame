@@ -52,7 +52,7 @@ export const MainContainer: FC<Props> = observer(({ client }) => {
             gameStore.accum -= 1;
             gameStore.isTap = true;
             console.log('client', client);
-            client?.publish({ destination: '/user/tap', body: userId });
+            client?.publish({ destination: '/ws/tap', body: userId });
             handleDebounceClick();
         }
     });

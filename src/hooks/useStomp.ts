@@ -15,7 +15,7 @@ export const useStomp = (): ReturnHook => {
         onConnect: () => {
             client.publish({ destination: '/ws/user', body: userId });
             client.subscribe('/user/topic/user', (message) => console.log(`Received: ${message.body}`));
-            client.subscribe('/topic/balance', (message) => console.log(`Received: ${message.body}`));
+            client.subscribe('/user/topic/balance', (message) => console.log(`Received: ${message.body}`));
         },
     });
 
