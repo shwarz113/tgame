@@ -13,16 +13,17 @@ import { Init } from './Init';
 import { useStomp } from './hooks/useStomp';
 
 function App() {
-    const { client } = useStomp();
+    const { client, getClient } = useStomp();
 
     console.log('client', client);
+    console.log('getClient', getClient());
 
     return (
         <div className="App">
             <Init />
             <Header />
             <Routes>
-                <Route path={DOMAIN} element={<MainContainer />} />
+                <Route path={DOMAIN} element={<MainContainer client={client} />} />
                 <Route path={`${DOMAIN}${PagesEnum.PEOPLE}`} element={<PeopleContainer />} />
                 <Route path={`${DOMAIN}${PagesEnum.LOOT}`} element={<LootboxContainer />} />
                 <Route path={`${DOMAIN}${PagesEnum.INVEST}`} element={<Investments list={instrumentsMock} />} />

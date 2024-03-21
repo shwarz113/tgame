@@ -4,24 +4,26 @@ import { SOCKET_URL } from '../constants';
 
 type ReturnHook = {
     client?: Client;
+    getClient: () => Client;
 };
 export const useStomp = (): ReturnHook => {
-    const client = useRef<Client>();
     // @ts-ignore
-    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.username || 'это тест (значит username не считался)'
+    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.username || 'это тест (значит username не считался)';
 
-    console.log('useStomp');
+    const client = new Client({
+        brokerURL: SOCKET_URL,
+        onConnect: () => {
+            client.publish({ destination: '/ws/user', body: userId });
+            client.subscribe('/user/topic/user', (message) => console.log(`Received: ${message.body}`));
+            client.subscribe('/topic/balance', (message) => console.log(`Received: ${message.body}`));
+        },
+    });
+
+    const getClient = () => client;
 
     useEffect(() => {
-        client.current = new Client({
-            brokerURL: SOCKET_URL,
-            onConnect: () => {
-                client.current?.publish({ destination: '/ws/user', body: JSON.stringify({ userId }) });
-                client.current?.subscribe('/user/topic/user', (message) => console.log(`Received: ${message.body}`));
-            },
-        });
-        client.current?.activate();
+        client.activate();
     }, []);
 
-    return { client: client.current };
+    return { client, getClient };
 };

@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, {FC, useRef} from 'react';
 import AnimatedNumber from 'animated-number-react';
+import {Client} from "@stomp/stompjs";
 import { action } from 'mobx';
 import store from './store.png';
 import upgrade from './upgrade.png';
@@ -12,8 +13,14 @@ import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
 import {DOMAIN, PagesEnum} from "../../constants";
+import {useStomp} from "../../hooks/useStomp";
 
-export const MainContainer = observer(() => {
+type Props = {
+    client?: Client;
+}
+export const MainContainer: FC<Props> = observer(({ client }) => {
+    // @ts-ignore
+    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.username || 'это тест (значит username не считался)'
     const { gameStore } = useStore();
     const navigate = useNavigate();
     const {
@@ -44,6 +51,8 @@ export const MainContainer = observer(() => {
             gameStore.points += incTapValue;
             gameStore.accum -= 1;
             gameStore.isTap = true;
+            console.log('client', client);
+            client?.publish({ destination: '/user/tap', body: userId });
             handleDebounceClick();
         }
     });
