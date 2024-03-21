@@ -1,17 +1,17 @@
-type Person = {
-    userName: string;
+import box1 from './box1.png'
+import box2 from './box2.png'
+import box3 from './box3.png'
+import box4 from './box4.png'
+import box5 from './box5.png'
+type Lootbox = {
+    price: number;
     pic: string;
 };
-type People = Person[];
-export const peopleFollowersMock: People = [
-    { userName: 'shwarz777', pic: 'https://randomuser.me/api/portraits/thumb/men/75.jpg' },
-    { userName: 'vika1993', pic: 'https://randomuser.me/api/portraits/thumb/women/7.jpg' },
-];
-export const peopleFollowingMock: People = [
-    { userName: 'kolek1113', pic: 'https://randomuser.me/api/portraits/thumb/men/5.jpg' },
-    { userName: 'serega228', pic: 'https://randomuser.me/api/portraits/thumb/men/15.jpg' },
-];
-export const peopleRefsMock: People = [
-    { userName: 'olega1', pic: 'https://randomuser.me/api/portraits/thumb/men/90.jpg' },
-    { userName: 'ponchik14', pic: 'https://randomuser.me/api/portraits/thumb/men/2.jpg' },
+
+export const lootboxesMock: Lootbox[] = [
+    { pic: box1, price: 100 },
+    { pic: box2, price: 10000 },
+    { pic: box3, price: 200000 },
+    { pic: box4, price: 50000000 },
+    { pic: box5, price: 9000000000 },
 ];

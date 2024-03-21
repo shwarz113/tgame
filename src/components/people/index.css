@@ -12,9 +12,9 @@
     font-size: 12px;
     padding: 12px;
     cursor: pointer;
-    &.active {
-        text-decoration: underline;
-    }
+}
+.people-container-tab.active {
+    text-decoration: underline;
 }
 
 .person-item {
