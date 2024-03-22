@@ -14,13 +14,14 @@ import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
 import {DOMAIN, PagesEnum} from "../../constants";
 import {useStomp} from "../../hooks/useStomp";
+// import {MobXApp} from "../../store/MobXStore";
 
 type Props = {
     client?: Client;
+    app: any;
 }
-export const MainContainer: FC<Props> = observer(({ client }) => {
+export const MainContainer: FC<Props> = observer(({ client, app }) => {
     // @ts-ignore
-    const userId = window.Telegram.WebApp?.initDataUnsafe?.user?.username || 'это тест (значит username не считался)'
     const { gameStore } = useStore();
     const navigate = useNavigate();
     const {
@@ -52,7 +53,8 @@ export const MainContainer: FC<Props> = observer(({ client }) => {
             gameStore.accum -= 1;
             gameStore.isTap = true;
             console.log('client', client);
-            client?.publish({ destination: '/ws/tap', body: userId });
+            app.handleTap();
+            // client?.publish({ destination: '/ws/tap', body: userId });
             handleDebounceClick();
         }
     });

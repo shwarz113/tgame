@@ -1,6 +1,6 @@
 type NFormatter = { num: number; precision?: number };
 
-const toFixed = (n: number, fixed: number) => `${n}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`))?.[0] || 0;
+export const toFixed = (n: number, fixed: number) => `${n}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${fixed}})?`))?.[0] || 0;
 export const nFormatter = ({ num, precision = 1 }: NFormatter) => {
     const lookup = [
         { value: 1, symbol: '' },
