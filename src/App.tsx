@@ -12,10 +12,18 @@ import './App.css';
 import { Init } from './Init';
 import app from './store/MobXStore';
 import { Loader } from './components/loader';
+import {observer} from "mobx-react-lite";
 
 function App() {
     console.log('app', app);
-    console.log('isLoading', app.isLoading);
+
+    if (app.isLoading) {
+        return (
+            <div className="App">
+                <Loader />
+            </div>
+        )
+    }
 
     return (
         <div className="App">
@@ -35,4 +43,4 @@ function App() {
     );
 }
 
-export default App;
+export default observer(App);

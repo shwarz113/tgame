@@ -1,4 +1,4 @@
-import {action, makeAutoObservable, makeObservable, observable} from 'mobx';
+import { action, makeAutoObservable } from 'mobx';
 import { UserInfo } from '../hooks/type';
 import { Client } from '@stomp/stompjs';
 import { SOCKET_URL } from '../constants';
@@ -28,7 +28,7 @@ class MobXApp {
     @action
     setUserInfo(value: string) {
         const userInfo = JSON.parse(value) as UserInfo;
-        console.log('userInfo', userInfo)
+        console.log('userInfo', userInfo);
         this.points = userInfo?.balance || 0;
         this.isLoading = false;
     }

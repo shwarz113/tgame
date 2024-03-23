@@ -13,14 +13,11 @@ import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
 import {DOMAIN, PagesEnum} from "../../constants";
-import {useStomp} from "../../hooks/useStomp";
-// import {MobXApp} from "../../store/MobXStore";
 
 type Props = {
-    client?: Client;
     app: any;
 }
-export const MainContainer: FC<Props> = observer(({ client, app }) => {
+export const MainContainer: FC<Props> = observer(({ app }) => {
     // @ts-ignore
     const { gameStore } = useStore();
     const navigate = useNavigate();
@@ -52,9 +49,7 @@ export const MainContainer: FC<Props> = observer(({ client, app }) => {
             gameStore.points += incTapValue;
             gameStore.accum -= 1;
             gameStore.isTap = true;
-            console.log('client', client);
             app.handleTap();
-            // client?.publish({ destination: '/ws/tap', body: userId });
             handleDebounceClick();
         }
     });

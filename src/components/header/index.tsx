@@ -5,6 +5,7 @@ import { ScoreHeader } from './score';
 import { Accum } from './accum';
 import './index.css';
 import { action } from 'mobx';
+import app from "../../store/MobXStore";
 // import {MobXApp} from "../../store/MobXStore";
 
 type Props = {
@@ -24,8 +25,6 @@ export const Header: FC<Props> = observer(({ app }) => {
     useEffect(() => {
         handleIncPointsAction();
     }, []);
-
-    console.log('app.points', app.points);
 
     return (
         <div className="header">
