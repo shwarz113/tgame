@@ -87,7 +87,7 @@ export const MainContainer: FC<Props> = observer(({ client, app }) => {
             <div
                 className="main-container-bg"
                 style={{ backgroundImage: roomUpgrades.main }}
-                onTouchStart={handleCoinClick}
+                // onTouchStart={handleCoinClick}
                 onClick={handleCoinClick}
             >
                 <img src={roomUpgrades.main} />
