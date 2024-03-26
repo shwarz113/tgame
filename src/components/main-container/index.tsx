@@ -1,29 +1,28 @@
-import React, {FC, useRef} from 'react';
+import React, {FC, useCallback, useRef, useState} from 'react';
 import AnimatedNumber from 'animated-number-react';
-import {Client} from "@stomp/stompjs";
 import { action } from 'mobx';
 import store from './store.png';
 import upgrade from './upgrade.png';
 import people from './people.png';
 import box from './box.png';
-import './index.css';
 import { useStore } from '../../store/store';
 import { TURBO_TIME } from '../../store/constants';
 import { observer } from 'mobx-react-lite';
 import {useNavigate} from "react-router-dom";
 import {Task} from "./task";
 import {DOMAIN, PagesEnum} from "../../constants";
+import './index.css';
+import {MobXAppStore} from "../../store/MobXStore";
 
 type Props = {
-    app: any;
+    app: MobXAppStore;
 }
 export const MainContainer: FC<Props> = observer(({ app }) => {
-    // @ts-ignore
+    const [points, setPoints] = useState<string[]>([]);
     const { gameStore } = useStore();
     const navigate = useNavigate();
     const {
         accum,
-        incTapValue,
         isTurboTapMode,
         roomUpgrades,
     } = gameStore;
@@ -40,17 +39,21 @@ export const MainContainer: FC<Props> = observer(({ app }) => {
         }
         tapTimerDebounceRef.current = setTimeout(() => {
             handleTapAction(false);
+            setPoints([]);
         }, 1000);
     }
+    const animatePoints = useCallback(() => {
+        const key = Math.floor(Math.random() * 3) + 1 + Math.random().toFixed(6);
+        const p = points.length > 30 ? [...points.slice(25), key]: [...points, key];
+        setPoints(p);
+    }, [points.length])
 
     const handleCoinClick = action((e: any) => {
-        e?.preventDefault();
         if (accum) {
-            gameStore.points += incTapValue;
-            gameStore.accum -= 1;
             gameStore.isTap = true;
             app.handleTap();
             handleDebounceClick();
+            animatePoints();
         }
     });
 
@@ -87,7 +90,11 @@ export const MainContainer: FC<Props> = observer(({ app }) => {
             >
                 <img src={roomUpgrades.main} />
                 <div className="fake-scroll"></div>
-                <div></div>
+                {points.map((v) => (
+                    <div key={v} className={`coin-wrapper anim${v[0]}`}>
+                        <div>+{app.commonInfo?.coinPerTap.currentValue || 1}</div>
+                    </div>
+                ))}
             </div>
             <div>&#8593;tap on the man!&#8593;</div>
             <Task />

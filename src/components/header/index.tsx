@@ -5,11 +5,10 @@ import { ScoreHeader } from './score';
 import { Accum } from './accum';
 import './index.css';
 import { action } from 'mobx';
-import app from "../../store/MobXStore";
-// import {MobXApp} from "../../store/MobXStore";
+import {MobXAppStore} from "../../store/MobXStore";
 
 type Props = {
-    app: any;
+    app: MobXAppStore;
 }
 export const Header: FC<Props> = observer(({ app }) => {
     const { gameStore } = useStore();
@@ -28,8 +27,8 @@ export const Header: FC<Props> = observer(({ app }) => {
 
     return (
         <div className="header">
-            <ScoreHeader points={app.points} pointsPerSecond={pointsPerSecond} isTap={isTap} />
-            <Accum accum={accum} accumCapacity={accumCapacity} />
+            <ScoreHeader points={app.balance} pointsPerSecond={app.income} isTap={isTap} />
+            <Accum accum={app.battery} accumCapacity={app.commonInfo?.battery.capacity || 0} />
         </div>
     );
 });

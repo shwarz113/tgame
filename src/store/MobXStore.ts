@@ -5,7 +5,10 @@ import { SOCKET_URL } from '../constants';
 
 class MobXApp {
     client: Client | undefined;
-    points: number = 0;
+    commonInfo?: UserInfo;
+    balance: number = 0;
+    income: number = 0;
+    battery: number = 0;
     userName: string = '';
     isLoading = true;
 
@@ -29,12 +32,15 @@ class MobXApp {
     setUserInfo(value: string) {
         const userInfo = JSON.parse(value) as UserInfo;
         console.log('userInfo', userInfo);
-        this.points = userInfo?.balance || 0;
+        this.balance = userInfo?.balance || 0;
+        this.battery = userInfo?.battery.currentValue || 0;
+        this.income = userInfo?.income || 0;
+        this.commonInfo = userInfo;
         this.isLoading = false;
     }
     @action
     updatePoints(v: number) {
-        this.points = v;
+        this.balance = v;
     }
     @action
     handleTap() {
@@ -44,4 +50,5 @@ class MobXApp {
     handleBuy(name: string, points: number, isUpgrades = false) {}
 }
 
+export type MobXAppStore = MobXApp;
 export default new MobXApp();
