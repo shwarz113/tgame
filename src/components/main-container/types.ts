@@ -7,8 +7,3 @@ export type InvestmentItem = {
 };
 
 export type Investments = InvestmentItem[];
-
-export enum UpgradesEnum {
-    'TAP' = 'TAP',
-    'ACCUM' = 'ACCUM',
-}

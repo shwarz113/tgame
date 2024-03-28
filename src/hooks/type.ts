@@ -1,4 +1,10 @@
-export type Investments = null;
+export type Investment = {
+    id: string;
+    price: number;
+    powerUpAmount: number;
+    powerUpGrowth: number;
+    level: number;
+};
 export type CoinPerTap = {
     currentValue: number;
     currentValueRaiser: {
@@ -41,7 +47,7 @@ export type UserInfo = {
     balance: number;
     income: number;
     battery: Battery;
-    investments: Investments;
+    investments: Investment[];
     coinPerTap: CoinPerTap;
     room: {
         id: 'downtownApartment',
@@ -71,7 +77,7 @@ export const userMock: UserInfo = {
             },
         },
     },
-    investments: null,
+    investments: [],
     coinPerTap: {
         currentValue: 1,
         currentValueRaiser: {

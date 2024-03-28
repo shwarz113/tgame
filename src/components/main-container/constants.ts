@@ -1,9 +1,9 @@
 import { Investments } from './types';
-import miner from './miner.png';
-import farm from './farm.png';
-import airdrop from './airdrop.png';
-import p2p from './p2p.png';
-import exchange from './exchange.png';
+import miner from '../investments/img/miner.png';
+import farm from '../investments/img/farm.png';
+import airdrop from '../investments/img/airdrop.png';
+import p2p from '../investments/img/p2p.png';
+import exchange from '../investments/img/exchange.png';
 import tap from './tap.png';
 import scyscrapper from './scyscrapper.png';
 import thunder from '../../thunder.png';

@@ -1,56 +1,46 @@
 import { FC, useCallback } from 'react';
 import { InvestmentsItem } from './item';
 import { getPriceValue } from '../../utils/getPriceValue';
-import { Investments as InvestmentsType } from '../main-container/types'
 import {observer} from "mobx-react-lite";
 import {useStore} from "../../store/store";
 import {action} from "mobx";
 import './index.css';
+import {MobXAppStore} from "../../store/MobXStore";
+import {investPicById} from "./img";
 
 type Props = {
-    list: InvestmentsType;
+    app: MobXAppStore;
 };
 
 type Values = {
     price: number;
     isAvailable: boolean;
 };
-export const Investments: FC<Props> = observer(({ list }) => {
+export const Investments: FC<Props> = observer(({ app }) => {
     const { gameStore } = useStore();
-    const { points, investments, levelsByName } = gameStore;
+    const { investments, levelsByName } = gameStore;
     const getValues = useCallback(
         (name: string, base_price: number): Values => {
             const price = getPriceValue({ base_price, level: levelsByName[name] });
-            const isAvailable = price <= points;
+            const isAvailable = price <= app.balance;
             return { price, isAvailable };
         },
-        [points]
+        [app.balance]
     );
 
-    const handleBuyAction = action((name: string, points: number) => {
-        gameStore.points = points;
-        gameStore.levelsByName = { ...gameStore.levelsByName, [name]: (gameStore.levelsByName?.[name] || 0) + 1 };
-        gameStore.pointsPerSecond += investments.find(({ name: v }) => v === name)?.base_income || 0;
+    const handleBuy = action((id: string) => {
+        app.handleBuyInvest(id)
     });
-
-    const handleBuy = useCallback(
-        (name: string, price: number, isUpgrades = false) => {
-            if (price <= points) {
-                handleBuyAction(name, points - price);
-            }
-        },
-        [points]
-    );
 
     return (
         <div className={'investments-wrapper'}>
-            {list.map((v, i) => (
+            {app.investments.map((v) => (
                 <InvestmentsItem
-                    key={v.name}
+                    key={v.id}
                     data={v}
-                    level={levelsByName[v.name]}
                     handleBuy={handleBuy}
-                    {...getValues(v.name, v.base_price)}
+                    isAvailable={app.balance > v.price}
+                    pic={investPicById[v.id]}
                 />
             ))}
         </div>

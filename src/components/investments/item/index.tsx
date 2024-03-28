@@ -1,34 +1,31 @@
-import { InvestmentItem } from '../../main-container/types';
 import { FC } from 'react';
-import { PRICE_MULTIPLIER } from '../../main-container/constants';
 import './index.css';
 import { nFormatter } from '../../../utils/formatters';
+import { Investment } from '../../../hooks/type';
 
 type Props = {
-    data: InvestmentItem;
-    level: number;
-    price: number;
+    pic: string;
+    data: Investment;
     isAvailable: boolean;
-    handleBuy: (name: string, price: number) => void;
+    handleBuy: (name: string) => void;
 };
 export const InvestmentsItem: FC<Props> = ({
-    data: { name, pic, base_income },
-    level,
-    price,
+    data: { id, level, price, powerUpGrowth, powerUpAmount },
     isAvailable,
     handleBuy,
+    pic,
 }) => {
-    const onClick = () => handleBuy(name, price);
+    const onClick = () => handleBuy(id);
     return (
         <div className={'investments-item'}>
             <div className="investments-item-img">
-                <img src={pic} alt={name} />
+                <img src={pic} alt={id} />
             </div>
             <div className={'investments-item-content'}>
-                <div>{name}</div>
+                <div>{id}</div>
                 <div>
                     <div className="investments-item-content-info">
-                        {level ? <div>+{nFormatter({ num: base_income * level })}/s</div> : <div> </div>}
+                        {level ? <div>+{nFormatter({ num: powerUpAmount })}/s</div> : <div> </div>}
                         <div className={'investments-item-content-info-level'}>
                             <div style={{ width: `${(level % 10) * 10}%` }}></div>
                             <div>{level} level</div>
@@ -36,7 +33,7 @@ export const InvestmentsItem: FC<Props> = ({
                     </div>
                     <div className={`investments-item-content-buy ${isAvailable ? 'available' : ''}`}>
                         <div onClick={onClick}>{nFormatter({ num: price })}</div>
-                        <div>+{nFormatter({ num: base_income })}/s</div>
+                        <div>+{nFormatter({ num: powerUpGrowth })}/s</div>
                     </div>
                 </div>
             </div>

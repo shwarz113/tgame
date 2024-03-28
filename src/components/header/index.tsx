@@ -12,19 +12,7 @@ type Props = {
 }
 export const Header: FC<Props> = observer(({ app }) => {
     const { gameStore } = useStore();
-    const { accum, accumCapacity, points, pointsPerSecond, isTap } = gameStore;
-
-    const handleIncPointsAction = action(() => {
-        setTimeout(() => {
-            if (gameStore.pointsPerSecond) gameStore.points += gameStore.pointsPerSecond;
-            handleIncPointsAction();
-        }, 1000);
-    });
-
-    useEffect(() => {
-        handleIncPointsAction();
-    }, []);
-
+    const { isTap } = gameStore;
     return (
         <div className="header">
             <ScoreHeader points={app.balance} pointsPerSecond={app.income} isTap={isTap} />

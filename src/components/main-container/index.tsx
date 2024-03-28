@@ -22,7 +22,6 @@ export const MainContainer: FC<Props> = observer(({ app }) => {
     const { gameStore } = useStore();
     const navigate = useNavigate();
     const {
-        accum,
         isTurboTapMode,
         roomUpgrades,
     } = gameStore;
@@ -49,7 +48,7 @@ export const MainContainer: FC<Props> = observer(({ app }) => {
     }, [points.length])
 
     const handleCoinClick = action((e: any) => {
-        if (accum) {
+        if (app.battery) {
             gameStore.isTap = true;
             app.handleTap();
             handleDebounceClick();

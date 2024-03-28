@@ -33,7 +33,7 @@ function App() {
                 <Route path={DOMAIN} element={<MainContainer app={app} />} />
                 <Route path={`${DOMAIN}${PagesEnum.PEOPLE}`} element={<PeopleContainer />} />
                 <Route path={`${DOMAIN}${PagesEnum.LOOT}`} element={<LootboxContainer />} />
-                <Route path={`${DOMAIN}${PagesEnum.INVEST}`} element={<Investments list={instrumentsMock} />} />
+                <Route path={`${DOMAIN}${PagesEnum.INVEST}`} element={<Investments app={app} />} />
                 <Route
                     path={`${DOMAIN}${PagesEnum.UPGRADES}`}
                     element={<Upgrades list={upgradesMock} roomsUpgrades={upgradesRoomMock} />}
